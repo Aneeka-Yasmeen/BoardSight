@@ -1,0 +1,69 @@
+{
+  "device": "samsung SM-A576B, Android 17, arm64-v8a",
+  "confidence": 0.44999998807907104,
+  "iou": 0.33,
+  "accuracy": {
+    "pcbdefect": {
+      "precision": 0.821,
+      "recall": 0.873,
+      "f1": 0.846,
+      "defects": 189
+    },
+    "deeppcb": {
+      "precision": 0.944,
+      "recall": 0.968,
+      "f1": 0.956,
+      "defects": 312
+    },
+    "dspcb": {
+      "precision": 0.959,
+      "recall": 0.519,
+      "f1": 0.673,
+      "defects": 135
+    }
+  },
+  "clean_images": 30,
+  "clean_images_with_false_alarm": 3,
+  "timing": {
+    "infer_per_tile_ms_median": 88.176,
+    "tile_ms_median": 95.492,
+    "prepare_per_tile_ms_median": 3.604,
+    "post_per_tile_ms_median": 0.701,
+    "board_ms_median": 1355.975,
+    "fps_single_tile": 10.472,
+    "fps_full_board": 0.737
+  },
+  "llama_load_ms": 2730,
+  "llama": [
+    {
+      "ttft_ms": 1710,
+      "total_ms": 4563,
+      "prompt_tokens": 341,
+      "generated_tokens": 67,
+      "prefill_tokens_per_s": 199.299,
+      "decode_tokens_per_s": 23.484,
+      "accepted": true
+    },
+    {
+      "ttft_ms": 1859,
+      "total_ms": 5319,
+      "prompt_tokens": 341,
+      "generated_tokens": 81,
+      "prefill_tokens_per_s": 183.432,
+      "decode_tokens_per_s": 23.41,
+      "accepted": true
+    },
+    {
+      "ttft_ms": 1798,
+      "total_ms": 5280,
+      "prompt_tokens": 341,
+      "generated_tokens": 81,
+      "prefill_tokens_per_s": 189.655,
+      "decode_tokens_per_s": 23.263,
+      "accepted": true
+    }
+  ],
+  "memory_pss_mb": 1423,
+  "memory_peak_rss_mb": 1670,
+  "power_w_mean": 4.623
+}

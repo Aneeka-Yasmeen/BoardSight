@@ -4,6 +4,8 @@ An offline Android app that inspects bare printed circuit boards. A phone camera
 
 Made for the Bharat AI SoC Challenge, Problem Statement 5: real-time industrial defect detection and quality control assistant.
 
+**Final project report:** [docs/BoardSight_Report.pdf](docs/BoardSight_Report.pdf)
+
 ## Preview
 
 | Result | Llama's advice | Findings, questions and timing |
@@ -99,6 +101,24 @@ Measured on a PC with the app's tiling, merging and 0.45 threshold (IoU > 0.33).
 A false alarm appeared on 16.8% of 250 clean DeepPCB images. The board check refused none of 611 defective-board images and 1.6% of 500 clean DeepPCB images. Trained and tested on other images, it refused 91% of 101 non-board pictures.
 
 PCB-Defect and PKU are split by board design. DeepPCB's official split shares board groups between training and test, so its score is optimistic. Phone camera accuracy is lower than these figures.
+
+## Measured on the phone
+
+BoardSight 1.7 on a Samsung Galaxy A57 (SM-A576B), unplugged. Full output: `docs/benchmark_galaxy_a57.json`.
+
+| Measure | Result |
+|---|---|
+| Detector, per tile | 95 ms (10.5 FPS) |
+| Full etched-board image, median | 1.36 s |
+| Llama load | 2.7 s |
+| Llama time to first token | 1.71 to 1.86 s |
+| Llama generation | 23.3 to 23.5 tokens/s |
+| Llama total reply | 4.6 to 5.3 s |
+| Memory with Llama | 1423 MB, peak 1670 MB |
+| Power, whole phone | 4.6 W, approximate |
+| F1, PCB-Defect subset (189 defects) | 0.846 |
+| F1, DeepPCB subset (312 defects) | 0.956 |
+| F1, DsPCBSD+ subset (135 defects) | 0.673 |
 
 ## Why these models on the edge
 
