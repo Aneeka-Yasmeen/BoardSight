@@ -43,6 +43,7 @@ class EdgeModel(app: Application) : AndroidViewModel(app) {
     var liveProgress by mutableStateOf(0 to 1)
     var liveVerdict by mutableStateOf<Verdict?>(null)
     var liveStrange by mutableStateOf(false)
+    var liveDark by mutableStateOf(false)
     private var strangeImage: Bitmap? = null
     var liveFps by mutableFloatStateOf(0f)
     var auto by mutableStateOf(false)
@@ -118,12 +119,14 @@ class EdgeModel(app: Application) : AndroidViewModel(app) {
         val now = SystemClock.elapsedRealtime()
         val fps = if (lastFrame > 0) 1000f / max(1L, now - lastFrame) else 0f
         lastFrame = now
-        val strange = engine.checkBoard && (graded.size > Rules.MAX_MARKS || (done == t.count && Detector.median(liveScene.filterNotNull()) > Detector.NOT_BOARD))
+        val dark = sig.average() < Rules.DARK
+        val strange = dark || engine.checkBoard && (graded.size > Rules.MAX_MARKS || (done == t.count && Detector.median(liveScene.filterNotNull()) > Detector.NOT_BOARD))
         val fire = auto && !strange && done == t.count && busy == null && result == null && trigger(sig)
         val size = frame.width to frame.height
         viewModelScope.launch(Dispatchers.Main) {
             live = if (strange) emptyList() else graded
             liveStrange = strange
+            liveDark = dark
             liveFrame = size
             liveFps = if (liveFps == 0f) fps else liveFps * 0.8f + fps * 0.2f
             liveProgress = done to t.count

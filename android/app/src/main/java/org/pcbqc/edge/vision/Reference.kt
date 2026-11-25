@@ -19,6 +19,7 @@ import org.opencv.imgproc.Imgproc
 import org.pcbqc.edge.core.Box
 import org.pcbqc.edge.core.Finding
 import org.pcbqc.edge.core.Quality
+import org.pcbqc.edge.core.Rules
 import kotlin.math.max
 import kotlin.math.min
 
@@ -233,11 +234,11 @@ object Reference {
         listOf(g, lap, half, hot).forEach { it.release() }
         val p = buildList {
             if (sharp < 40f) add("image is blurred")
-            if (mean < 35f) add("image is too dark")
+            if (mean < Rules.DARK) add("image is too dark")
             if (mean > 225f) add("image is too bright")
             if (fromCamera && glare > 12f) add("too much glare")
             if (max(b.width, b.height) < 400) add("image is too small")
         }
-        return Quality(sharp, mean, glare, p)
+        return Quality(sharp, mean, glare, p, fromCamera && mean < Rules.DARK)
     }
 }

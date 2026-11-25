@@ -46,10 +46,12 @@ object Rules {
     }
 
     const val MAX_MARKS = 30
+    const val DARK = 35f
     const val NO_BOARD = "this does not look like a bare board"
 
     fun verdict(graded: List<Finding>, quality: Quality, notBoard: Boolean = false): Pair<Verdict, String> {
         if (notBoard) return Verdict.RETAKE to NO_BOARD
+        if (quality.unusable) return Verdict.RETAKE to quality.problems.joinToString(", ")
         if (graded.isEmpty()) {
             return if (quality.ok) Verdict.PASS to "No defects found in a usable image"
             else Verdict.RETAKE to quality.problems.joinToString(", ")

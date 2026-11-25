@@ -4,6 +4,18 @@ An offline Android app that inspects bare printed circuit boards. A phone camera
 
 Made for the Bharat AI SoC Challenge, Problem Statement 5: real-time industrial defect detection and quality control assistant.
 
+## Preview
+
+| Result | Llama's advice | Findings, questions and timing |
+|---|---|---|
+| ![Marked board with a REJECT verdict](docs/images/1_result.png) | ![Advice written by Llama](docs/images/2_advice.png) | ![Findings and timing](docs/images/3_findings.png) |
+
+| Boards by reason | Inspection log | Board check, live |
+|---|---|---|
+| ![Boards counted by reason code](docs/images/4_reasons.png) | ![Inspection log](docs/images/5_log.png) | ![Live view refusing a view that is not a board](docs/images/6_board_check.png) |
+
+Screenshots from a Samsung Galaxy A57. Board image: PCB-Defect, doi:10.17632/vdj74sngvn.1, CC BY 4.0, opened with Picture.
+
 ## How it works
 
 1. **Camera:** live whole-frame preview, then a full photo.
@@ -115,15 +127,17 @@ What each change did to F1 on the 51 held-out etched boards:
 | YOLO11n trained on four datasets (threshold 0.35) | 0.80 |
 | Plus tile merging and threshold 0.45 | 0.87 |
 
-## Limits
+## Where it works best
 
-- For bare boards only, not boards with components.
-- Breaks in hairline tracks can be missed.
-- Photographing a screen adds false alarms. In one informal test, 11 of 15 planted defects on three board photos were found with the right type, with 4 extra boxes, and a clean board was marked REWORK without a reference.
-- Black-and-white scans with dark copper, photographed by camera, give swapped types such as open circuit for short. Open such files directly instead.
-- The board check can miss unusual scenes and can refuse a dark or badly framed board.
-- A print or screen is not the same as a real board under factory light.
-- The verdict supports an operator and does not replace electrical testing.
+- **Bare boards** before parts are fitted, which is where these defects are cheapest to fix.
+- **One board filling the frame**, in focus and in even light, on a plain background.
+- **Real boards or paper prints.** Screens add their own pixel pattern, so open image files with **Picture** instead.
+- **Black-and-white inspection scans** are best opened directly with **Picture** rather than photographed.
+- **A clean reference board** gives the steadiest results, because the app compares every scan with it.
+- **Standard track widths.** Very fine hairline tracks benefit from a closer photo.
+- **Teamwork with an operator:** unsure cases go to REVIEW, and people can overrule any verdict. Electrical testing remains the final check.
+
+Next steps: boards with components, more factory images, and training on photos from the target line.
 
 ## Folders
 

@@ -1,11 +1,11 @@
-data/
-runs/
-work/
+/data/
+/runs/
+/work/
 *.pte
 *.apk
 *.aab
 *.db
-out/
+/desktop/out/
 venv/
 .venv/
 __pycache__/

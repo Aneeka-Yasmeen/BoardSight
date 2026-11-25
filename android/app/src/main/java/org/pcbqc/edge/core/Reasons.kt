@@ -43,7 +43,7 @@ object Reasons {
                 else "Rule: scene score ${"%.1f".format(java.util.Locale.US, ins.times.scene)} is above the limit, so nothing is judged",
             ) else Triple(
                 "IMG-" + ins.quality.problems.joinToString("+") { imageCodes[it] ?: "BAD" }, "Picture not usable: ${ins.quality.problems.joinToString(", ")}",
-                "Rule: nothing found, but the picture is too poor to call it good",
+                if (ins.quality.unusable) "Rule: the camera picture is too dark to judge" else "Rule: nothing found, but the picture is too poor to call it good",
             )
             Verdict.REJECT -> {
                 val sure = critical.filter { it.certain }

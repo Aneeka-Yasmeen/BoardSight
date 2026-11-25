@@ -48,7 +48,7 @@ data class Finding(
     val label get() = type.replace('_', ' ')
 }
 
-data class Quality(val sharpness: Float, val brightness: Float, val glarePct: Float, val problems: List<String>) {
+data class Quality(val sharpness: Float, val brightness: Float, val glarePct: Float, val problems: List<String>, val unusable: Boolean = false) {
     val ok get() = problems.isEmpty()
 }
 

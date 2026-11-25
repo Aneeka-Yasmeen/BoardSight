@@ -114,6 +114,13 @@ class RulesTest {
         assertTrue(Playbook.template(i).contains("does not look like"))
     }
 
+    @Test fun aDarkCameraPictureIsNeverJudged() {
+        val dark = Quality(200f, 12f, 0f, listOf("image is too dark"), true)
+        assertEquals(Verdict.RETAKE, decide(listOf(f("short")), dark))
+        assertEquals(Verdict.RETAKE, decide(emptyList(), dark))
+        assertEquals("IMG-DARK", inspection(listOf(f("short")), dark).why.code)
+    }
+
     @Test fun cleanBoardPasses() = assertEquals(Verdict.PASS, decide(emptyList()))
 
     @Test fun blurredCleanBoardNeverPasses() = assertEquals(Verdict.RETAKE, decide(emptyList(), blurred))

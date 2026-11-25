@@ -90,7 +90,7 @@ fun InspectScreen(m: EdgeModel) {
                 val (done, all) = m.liveProgress
                 Text("● LIVE  ${"%.1f".format(m.liveFps)} FPS" + if (done < all) ", scanning $done of $all" else "", color = Color(0xFFFF5A4F), fontSize = 13.sp, fontWeight = FontWeight.Bold)
                 val v = m.liveVerdict
-                if (m.looking == null && m.liveStrange) Text("This does not look like a bare board", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                if (m.looking == null && m.liveStrange) Text(if (m.liveDark) "Too dark. Add light or tap Light." else "This does not look like a bare board", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                 else if (m.looking == null && v != null) {
                     val names = m.live.groupBy { it.label }.entries.take(4).joinToString(", ") { "${it.key} x${it.value.size}" }
                     Text("Preview: ${if (names.isEmpty()) "nothing found" else names}", color = verdictColor(v.name), fontSize = 14.sp, fontWeight = FontWeight.Bold)
